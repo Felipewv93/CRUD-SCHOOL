@@ -5,7 +5,7 @@
  */
 
 // URL base da API para operações com professores
-const API_URL = "https://school-system-spi.onrender.com/api/professores";
+const API_URL_PROFESSORES = "https://school-system-spi.onrender.com/api/professores";
 
 /**
  * Valida os dados do professor antes de enviar para a API
@@ -78,7 +78,7 @@ function fecharPopup() {
 async function editarProfessor(id) {
     try {
         // Busca os dados do professor na API
-        const response = await fetch(`${API_URL}/${id}`);
+        const response = await fetch(`${API_URL_PROFESSORES}/${id}`);
         if (!response.ok) throw new Error('Erro ao buscar dados do professor');
         
         const professor = await response.json();
@@ -104,7 +104,7 @@ async function excluirProfessor(id) {
     if (!confirm('Tem certeza que deseja excluir este professor?')) return;
     
     try {
-        const response = await fetch(`${API_URL}/${id}`, {
+        const response = await fetch(`${API_URL_PROFESSORES}/${id}`, {
             method: 'DELETE'
         });
         
@@ -126,7 +126,7 @@ async function listarProfessores() {
         container.innerHTML = '<p>Carregando professores...</p>';
 
         // Busca a lista de professores na API
-        const response = await fetch(API_URL);
+        const response = await fetch(API_URL_PROFESSORES);
         if (!response.ok) throw new Error('Erro ao buscar professores');
         
         const professores = await response.json();
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Valida e envia os dados
                 const dadosValidados = validarDadosProfessor(data);
                 
-                const response = await fetch(API_URL, {
+                const response = await fetch(API_URL_PROFESSORES, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Valida e envia os dados
                 const dadosValidados = validarDadosProfessor(data);
                 
-                const response = await fetch(`${API_URL}/${id}`, {
+                const response = await fetch(`${API_URL_PROFESSORES}/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
